@@ -3,256 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فرعون التاريخ | الأستاذ محمد عنتر</title>
-<meta name="description" content="منصة الأستاذ محمد عنتر - فرعون التاريخ. شرح التاريخ بطريقة ممتعة، منظمة، واحترافية.">
+<title>فرعون التاريخ | تسجيل الطلاب</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f7f1e5; --surface:#fffaf0; --surface2:#efe4ce; --text:#241b12;
-  --muted:#766856; --gold:#b68b3c; --gold2:#d6b36a; --brown:#4c3020;
-  --border:rgba(76,48,32,.14); --shadow:0 20px 50px rgba(62,42,22,.12);
-}
-[data-theme="dark"]{
-  --bg:#151311; --surface:#211d19; --surface2:#2b251f; --text:#f6eddb;
-  --muted:#b8aa94; --gold:#d6ad5c; --gold2:#e5c77f; --brown:#e7d5b6;
-  --border:rgba(255,231,187,.12); --shadow:0 20px 60px rgba(0,0,0,.3);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Cairo,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;transition:.3s}
-a{text-decoration:none;color:inherit}
-.container{width:min(1160px,92%);margin:auto}
-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:800}
-.logo{width:45px;height:45px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:"Playfair Display";font-size:20px}
-.brand small{display:block;color:var(--gold);font-size:11px;letter-spacing:1px}
-nav{display:flex;gap:24px;color:var(--muted);font-size:14px}
-nav a:hover{color:var(--gold)}
-.actions{display:flex;align-items:center;gap:10px}
-.icon-btn{width:42px;height:42px;border:1px solid var(--border);border-radius:50%;background:var(--surface);color:var(--text);cursor:pointer;font-size:18px}
-.hero{padding:90px 0 70px;position:relative;overflow:hidden}
-.hero:before{content:"𓂀";position:absolute;font-size:330px;opacity:.035;left:-20px;top:-50px;font-family:serif}
-.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--gold);font-weight:800;margin-bottom:18px}
-.eyebrow:before{content:"";width:30px;height:2px;background:var(--gold)}
-h1{font-family:"Playfair Display",serif;font-size:clamp(45px,7vw,78px);line-height:1.08;margin-bottom:20px}
-h1 span{color:var(--gold)}
-.hero p{color:var(--muted);font-size:18px;max-width:680px;margin-bottom:30px}
-.btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn{padding:13px 24px;border-radius:8px;font-weight:700;border:1px solid var(--gold);transition:.2s}
-.btn.primary{background:var(--gold);color:#20170e}
-.btn.primary:hover{transform:translateY(-2px);background:var(--gold2)}
-.btn.secondary{background:transparent;color:var(--text)}
-.btn.secondary:hover{background:var(--surface2)}
-.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:32px;box-shadow:var(--shadow);position:relative}
-.hero-card:after{content:"";position:absolute;inset:10px;border:1px solid var(--gold);border-radius:16px;opacity:.22;pointer-events:none}
-.pharaoh{height:270px;display:grid;place-items:center;font-family:"Playfair Display";font-size:120px;color:var(--gold);background:radial-gradient(circle,var(--surface2),transparent 65%)}
-.quote{font-family:"Playfair Display";font-size:19px;text-align:center;margin-top:10px}
-section{padding:78px 0}
-.section-head{text-align:center;margin-bottom:40px}
-.kicker{color:var(--gold);font-weight:800;font-size:13px}
-h2{font-family:"Playfair Display";font-size:42px;margin:4px 0 8px}
-.section-head p{color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;transition:.25s}
-.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-.card-icon{font-size:34px;color:var(--gold);margin-bottom:12px}
-.card h3{margin-bottom:8px;font-size:20px}
-.card p{color:var(--muted);font-size:14px}
-.stats{background:var(--surface2);border-block:1px solid var(--border)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
-.stat{padding:28px;border-left:1px solid var(--border)}
-.stat:last-child{border-left:0}
-.stat strong{display:block;color:var(--gold);font-size:34px;font-family:"Playfair Display"}
-.stat span{color:var(--muted);font-size:13px}
-.course{display:flex;flex-direction:column;gap:15px}
-.course-top{height:145px;border-radius:12px;background:linear-gradient(135deg,var(--brown),#8e6b35);display:flex;align-items:center;justify-content:center;color:#f8e8c6;font-size:44px;font-family:"Playfair Display"}
-.tag{display:inline-block;background:var(--surface2);color:var(--gold);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800}
-.course a{margin-top:auto;color:var(--gold);font-weight:800}
-.cta{background:var(--brown);color:#f8edda;border-radius:24px;padding:55px;text-align:center;position:relative;overflow:hidden}
-.cta:before{content:"𓂀";position:absolute;font-size:200px;opacity:.06;left:5%;top:-50px}
-.cta p{color:#d9c9ae;max-width:650px;margin:10px auto 25px}
-code{background:var(--surface2);padding:2px 7px;border-radius:6px;color:var(--gold)}
-.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.video-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
-.video-frame{aspect-ratio:16/9;background:#000}.video-frame iframe{width:100%;height:100%;border:0}
-.video-info{padding:18px}.video-info h3{margin-bottom:5px}.video-info p{color:var(--muted);font-size:13px}
-.ai-box{max-width:850px;margin:auto;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
-.ai-head{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);padding-bottom:16px}.ai-head small{display:block;color:var(--muted);font-size:12px}.ai-icon{width:48px;height:48px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:23px}
-.chat-messages{min-height:220px;max-height:420px;overflow:auto;padding:18px 4px;display:flex;flex-direction:column;gap:12px}.message{max-width:85%;padding:12px 16px;border-radius:14px;font-size:14px;white-space:pre-wrap}.message.bot{background:var(--surface2);align-self:flex-start}.message.user{background:var(--gold);color:#20170e;align-self:flex-end}.ai-form{display:flex;gap:10px;align-items:flex-end}.ai-form textarea{flex:1;min-height:60px;resize:vertical;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);padding:12px;font:inherit}.ai-form .btn{cursor:pointer;white-space:nowrap}.ai-form .btn:disabled{opacity:.6;cursor:wait}.ai-note{font-size:11px;color:var(--muted);margin-top:10px}
-footer{padding:30px 0;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
-.footer-flex{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.email{color:var(--gold);font-weight:700}
-@media(max-width:850px){
- .hero-grid{grid-template-columns:1fr}.hero-card{display:none}
- .cards{grid-template-columns:1fr 1fr}.video-grid{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}
- nav{display:none}
-}
-@media(max-width:560px){
- .cards{grid-template-columns:1fr}.video-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr} .ai-form{flex-direction:column}.ai-form textarea,.ai-form .btn{width:100%}
- .stat{border-bottom:1px solid var(--border)} h2{font-size:34px}
- .hero{padding-top:55px}.cta{padding:35px 20px}
-}
+:root{--bg:#f7f1e5;--surface:#fffaf0;--surface2:#efe4ce;--text:#241b12;--muted:#766856;--gold:#b68b3c;--brown:#4c3020;--border:rgba(76,48,32,.14);--shadow:0 20px 50px rgba(62,42,22,.12)}
+[data-theme=dark]{--bg:#151311;--surface:#211d19;--surface2:#2b251f;--text:#f6eddb;--muted:#b8aa94;--gold:#d6ad5c;--brown:#e7d5b6;--border:rgba(255,231,187,.12);--shadow:0 20px 60px rgba(0,0,0,.3)}
+*{box-sizing:border-box}body{margin:0;font-family:Cairo,Arial;background:var(--bg);color:var(--text);line-height:1.8}a{text-decoration:none;color:inherit}.container{width:min(1100px,92%);margin:auto}
+header{border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px)}.nav{height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800;font-size:18px}.brand small{display:block;color:var(--gold);font-size:11px}.logo{display:inline-grid;place-items:center;width:40px;height:40px;border:2px solid var(--gold);border-radius:50%;margin-left:8px;color:var(--gold)}
+main{padding:45px 0}.hero{text-align:center;padding:30px 0 20px}.hero h1{font-family:"Playfair Display";font-size:clamp(38px,7vw,64px);margin:10px 0}.hero h1 span{color:var(--gold)}.hero p{color:var(--muted);max-width:700px;margin:auto}
+.panel{max-width:620px;margin:30px auto;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:28px;box-shadow:var(--shadow)}.tabs{display:flex;gap:8px;margin-bottom:20px}.tabs button{flex:1;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--text);font:inherit;font-weight:700;cursor:pointer}.tabs button.active{background:var(--gold);color:#20170e}
+label{display:block;margin:12px 0 6px;font-weight:700}input,select{width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);font:inherit}button.main{width:100%;margin-top:18px;padding:13px;border:0;border-radius:10px;background:var(--gold);color:#20170e;font:inherit;font-weight:800;cursor:pointer}.hint{color:var(--muted);font-size:13px;margin-top:8px}.msg{margin-top:14px;padding:10px;border-radius:9px;display:none}.error{display:block;background:#7b2424;color:#fff}.ok{display:block;background:#245d3c;color:#fff}
+.dashboard{display:none}.topline{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}.logout,.theme{padding:9px 14px;border:1px solid var(--border);border-radius:9px;background:var(--surface2);color:var(--text);font:inherit;cursor:pointer}.videos{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:25px}.video{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px}.video h3{margin-top:0}.video a{color:var(--gold);font-weight:800}@media(max-width:650px){.videos{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a class="brand" href="#">
-      <div class="logo">𓂀</div>
-      <div>فرعون التاريخ<small>الأستاذ محمد عنتر</small></div>
-    </a>
-    <nav>
-      <a href="#about">عن المنصة</a>
-      <a href="#features">المميزات</a>
-      <a href="#courses">المحتوى</a>
-      <a href="#videos">الفيديوهات</a>
-      <a href="#ask-ai">اسأل فرعون</a>
-      <a href="#contact">تواصل معنا</a>
-    </nav>
-    <div class="actions">
-      <button class="icon-btn" id="themeBtn" aria-label="تغيير الوضع">☾</button>
-    </div>
-  </div>
-</header>
+<header><div class="container nav"><div class="brand"><span class="logo">𓂀</span>فرعون التاريخ<small>الأستاذ محمد عنتر</small></div><button class="theme" id="themeBtn">☾</button></div></header>
 
 <main>
-<section class="hero">
-<div class="container hero-grid">
-  <div>
-    <div class="eyebrow">منصة التاريخ بأسلوب مختلف</div>
-    <h1>أهلاً بك في<br><span>مملكة فرعون التاريخ</span></h1>
-    <p>مع الأستاذ <strong>محمد عنتر</strong>، التاريخ مش مجرد تواريخ وأسماء؛ دي حكايات، شخصيات، معارك، وحضارات هتخليك تفهم الماضي وتحفظه بسهولة.</p>
-    <div class="btns">
-      <a class="btn primary" href="#courses">اكتشف المحتوى</a>
-      <a class="btn secondary" href="#contact">تواصل مع الأستاذ</a>
-    </div>
-  </div>
-  <div class="hero-card">
-    <div class="pharaoh">𓂀</div>
-    <div class="quote">«التاريخ حكاية... وإحنا هنحكيها صح»</div>
-  </div>
+<div id="authArea">
+<section class="hero"><div class="container"><h1>مملكة <span>فرعون التاريخ</span></h1><p>سجّل دخولك للوصول إلى فيديوهات الصف الدراسي الخاص بك.</p></div></section>
+<div class="panel">
+<div class="tabs"><button id="loginTab" class="active">تسجيل الدخول</button><button id="registerTab">إنشاء حساب طالب</button></div>
+<form id="authForm">
+<label>اسم المستخدم</label><input id="username" autocomplete="username" required minlength="3" maxlength="30" placeholder="مثال: ahmed_123">
+<label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password" required minlength="6" placeholder="6 أحرف أو أكثر">
+<div id="gradeWrap" style="display:none"><label>الصف الدراسي</label><select id="grade"><option value="">اختر الصف</option><option>أولى إعدادي</option><option>ثانية إعدادي</option><option>ثالثة إعدادي</option><option>أولى ثانوي</option><option>ثانية ثانوي</option></select></div>
+<button class="main" id="submitBtn">دخول</button><div class="hint">لا تحتاج إلى بريد إلكتروني. كلمة المرور تُدار بأمان بواسطة Firebase.</div><div id="msg" class="msg"></div>
+</form>
 </div>
-</section>
-
-<section class="stats">
-<div class="container stats-grid">
-  <div class="stat"><strong>01</strong><span>منهج واضح ومنظم</span></div>
-  <div class="stat"><strong>100%</strong><span>شرح مبسط</span></div>
-  <div class="stat"><strong>24/7</strong><span>مراجعة ومذاكرة</span></div>
-  <div class="stat"><strong>∞</strong><span>شغف بالتاريخ</span></div>
 </div>
-</section>
 
-<section id="about">
+<section id="dashboard" class="dashboard">
 <div class="container">
-<div class="section-head"><div class="kicker">مين هو فرعون التاريخ؟</div><h2>التاريخ من غير تعقيد</h2><p>تجربة تعليمية تجمع بين قوة المعلومة ومتعة الحكاية.</p></div>
-<div class="cards">
-  <article class="card"><div class="card-icon">♜</div><h3>شرح منظم</h3><p>كل درس مترتب من البداية للنهاية، مع التركيز على الأفكار المهمة والعلاقات بين الأحداث.</p></article>
-  <article class="card"><div class="card-icon">𓂀</div><h3>أسلوب فرعون التاريخ</h3><p>شرح بسيط، أمثلة ذكية، وربط الأحداث ببعضها عشان المعلومة تثبت في دماغك.</p></article>
-  <article class="card"><div class="card-icon">✦</div><h3>مراجعة قبل الامتحان</h3><p>مراجعات مركزة وأسئلة تساعدك تختبر نفسك وتدخل الامتحان وأنت واثق.</p></article>
-</div>
-</div>
-</section>
-
-<section id="features">
-<div class="container">
-<div class="section-head"><div class="kicker">ليه تختار المنصة؟</div><h2>كل اللي تحتاجه في مكان واحد</h2></div>
-<div class="cards">
-  <article class="card"><h3>📜 ملازم وملخصات</h3><p>محتوى مرتب يساعدك تراجع بسرعة من غير ما تتوه بين مصادر كتير.</p></article>
-  <article class="card"><h3>🎯 أسئلة وتدريب</h3><p>تدرب على طريقة التفكير في أسئلة التاريخ، مش مجرد حفظ الإجابة.</p></article>
-  <article class="card"><h3>🏛️ تاريخ ممتع</h3><p>نحوّل الأحداث الجافة إلى قصص مترابطة تفضل فاكرها.</p></article>
-</div>
-</div>
-</section>
-
-<section id="videos">
-<div class="container">
-<div class="section-head"><div class="kicker">مكتبة الفيديو</div><h2>اتفرج واتعلم</h2><p>أضف فيديوهات YouTube التعليمية بسهولة من ملف <code>videos.js</code>.</p></div>
-<div class="video-grid" id="videoGrid"></div>
-</div>
-</section>
-
-<section id="ask-ai">
-<div class="container">
-<div class="section-head"><div class="kicker">مساعد فرعون التاريخ</div><h2>اسأل عن أي حاجة في التاريخ 🤖</h2><p>اكتب سؤالك، والمساعد هيرد عليك بشكل مبسط ومناسب للطلاب.</p></div>
-<div class="ai-box">
-  <div class="ai-head"><span class="ai-icon">𓂀</span><div><strong>اسأل فرعون التاريخ</strong><small>مساعد ذكي للتاريخ والدراسات الاجتماعية</small></div></div>
-  <div id="chatMessages" class="chat-messages"><div class="message bot">أهلاً يا بطل 👋 اسألني عن أي حدث أو شخصية أو درس في التاريخ.</div></div>
-  <form id="aiForm" class="ai-form">
-    <textarea id="question" maxlength="1200" placeholder="مثال: ما أسباب الحملة الفرنسية على مصر؟" required></textarea>
-    <button class="btn primary" type="submit" id="askBtn">اسأل الآن</button>
-  </form>
-  <div class="ai-note">تنبيه: المساعد أداة تعليمية، ويفضل مراجعة إجابات الامتحانات مع مدرسك.</div>
-</div>
-</div>
-</section>
-
-<section id="courses">
-<div class="container">
-<div class="section-head"><div class="kicker">محتوى المنصة</div><h2>رحلتك في عالم التاريخ</h2><p>نماذج لأقسام يمكن تطويرها لاحقاً إلى كورسات كاملة.</p></div>
-<div class="cards">
-  <article class="card course"><div class="course-top">𓂀</div><span class="tag">حضارات</span><h3>الحضارة المصرية القديمة</h3><p>من بناء الدولة إلى أعظم إنجازات المصريين القدماء.</p><a href="#contact">اعرف المزيد ←</a></article>
-  <article class="card course"><div class="course-top">⚔</div><span class="tag">حروب ومعارك</span><h3>أهم الحروب والمعارك</h3><p>نفهم الأسباب والنتائج والشخصيات المؤثرة في كل حدث.</p><a href="#contact">اعرف المزيد ←</a></article>
-  <article class="card course"><div class="course-top">♛</div><span class="tag">تاريخ حديث</span><h3>مصر والعالم الحديث</h3><p>أحداث وشخصيات صنعت شكل العالم والمنطقة كما نعرفها اليوم.</p><a href="#contact">اعرف المزيد ←</a></article>
-</div>
-</div>
-</section>
-
-<section id="contact">
-<div class="container">
-<div class="cta">
-<div class="kicker">ابدأ رحلتك</div>
-<h2>جاهز تبقى أنت كمان من ملوك التاريخ؟</h2>
-<p>تابع المنصة، وابدأ مذاكرتك مع الأستاذ محمد عنتر — «فرعون التاريخ».</p>
-<a class="btn primary" href="mailto:showahmed296@gmail.com">راسلنا الآن</a>
-</div>
+<div class="topline"><div><h2>أهلاً يا <span id="dashUser"></span> 👋</h2><div class="hint">الصف: <strong id="dashGrade"></strong></div></div><button class="logout" id="logoutBtn">تسجيل الخروج</button></div>
+<div class="videos" id="videos"></div>
 </div>
 </section>
 </main>
 
-<footer>
-<div class="container footer-flex">
-<div>© 2026 فرعون التاريخ — الأستاذ محمد عنتر</div>
-<div>البريد الإلكتروني: <a class="email" href="mailto:showahmed296@gmail.com">showahmed296@gmail.com</a></div>
-</div>
-</footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-<script src="videos.js"></script>
-<script>
-const API_URL = window.FAR3OON_API_URL || "";
-const btn=document.getElementById('themeBtn');
-const saved=localStorage.getItem('theme');
-if(saved){document.documentElement.setAttribute('data-theme',saved);btn.textContent=saved==='dark'?'☀':'☾';}
-btn.addEventListener('click',()=>{
- const dark=document.documentElement.getAttribute('data-theme')==='dark';
- const next=dark?'light':'dark';
- if(next==='dark') document.documentElement.setAttribute('data-theme','dark');
- else document.documentElement.removeAttribute('data-theme');
- localStorage.setItem('theme',next);
- btn.textContent=next==='dark'?'☀':'☾';
+const firebaseConfig={
+apiKey:"AIzaSyCxbrSZFZn0n58VFx2p2q50e_j8FGjYQgU",
+authDomain:"fr3on-eltari5.firebaseapp.com",
+projectId:"fr3on-eltari5",
+storageBucket:"fr3on-eltari5.firebasestorage.app",
+messagingSenderId:"735338799204",
+appId:"1:735338799204:web:e5a8c2c3509cb7091e7f71",
+measurementId:"G-2X9SJ9W5ZJ"
+};
+const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
+const domain="@students.fr3on-eltari5.firebaseapp.com";
+const grades=["أولى إعدادي","ثانية إعدادي","ثالثة إعدادي","أولى ثانوي","ثانية ثانوي"];
+const videoData={
+"أولى إعدادي":[["فيديوهات أولى إعدادي","https://www.youtube.com/","أضف رابط الفيديو الحقيقي هنا."]],
+"ثانية إعدادي":[["فيديوهات ثانية إعدادي","https://www.youtube.com/","أضف رابط الفيديو الحقيقي هنا."]],
+"ثالثة إعدادي":[["فيديوهات ثالثة إعدادي","https://www.youtube.com/","أضف رابط الفيديو الحقيقي هنا."]],
+"أولى ثانوي":[["فيديوهات أولى ثانوي","https://www.youtube.com/","أضف رابط الفيديو الحقيقي هنا."]],
+"ثانية ثانوي":[["فيديوهات ثانية ثانوي","https://www.youtube.com/","أضف رابط الفيديو الحقيقي هنا."]]
+};
+let mode="login";
+const $=id=>document.getElementById(id), form=$("authForm"), msg=$("msg");
+function emailFor(u){return u.trim().toLowerCase()+domain}
+function validUser(u){return /^[a-zA-Z0-9_\u0600-\u06FF]{3,30}$/.test(u.trim())}
+function showMsg(t,ok=false){msg.textContent=t;msg.className="msg "+(ok?"ok":"error")}
+$("loginTab").onclick=()=>{mode="login";$("loginTab").classList.add("active");$("registerTab").classList.remove("active");$("gradeWrap").style.display="none";$("submitBtn").textContent="دخول";msg.className="msg"};
+$("registerTab").onclick=()=>{mode="register";$("registerTab").classList.add("active");$("loginTab").classList.remove("active");$("gradeWrap").style.display="block";$("submitBtn").textContent="إنشاء الحساب";msg.className="msg"};
+form.onsubmit=async e=>{
+e.preventDefault();const u=$("username").value.trim(),p=$("password").value;
+if(!validUser(u)) return showMsg("اسم المستخدم يجب أن يكون من 3 إلى 30 حرفًا أو رقمًا أو _.");
+if(p.length<6) return showMsg("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");
+$("submitBtn").disabled=true;
+try{
+if(mode==="register"){
+const g=$("grade").value;if(!grades.includes(g)) throw new Error("اختر الصف الدراسي.");
+const cred=await createUserWithEmailAndPassword(auth,emailFor(u),p);
+await setDoc(doc(db,"users",cred.user.uid),{username:u,grade:g,createdAt:serverTimestamp()});
+showMsg("تم إنشاء الحساب بنجاح.",true);
+}else await signInWithEmailAndPassword(auth,emailFor(u),p);
+}catch(e){showMsg(e.code==="auth/email-already-in-use"?"اسم المستخدم مستخدم بالفعل.":e.code==="auth/invalid-credential"?"اسم المستخدم أو كلمة المرور غير صحيحة.":e.message)}
+finally{$("submitBtn").disabled=false}
+};
+$("logoutBtn").onclick=()=>signOut(auth);
+onAuthStateChanged(auth,async user=>{
+if(!user){$("authArea").style.display="block";$("dashboard").style.display="none";return}
+const snap=await getDoc(doc(db,"users",user.uid));
+if(!snap.exists()){await signOut(auth);return}
+const d=snap.data();$("dashUser").textContent=d.username;$("dashGrade").textContent=d.grade;
+$("videos").innerHTML=(videoData[d.grade]||[]).map(v=>`<article class="video"><h3>${v[0]}</h3><p>${v[2]}</p><a href="${v[1]}" target="_blank" rel="noopener">مشاهدة الفيديو ←</a></article>`).join("");
+$("authArea").style.display="none";$("dashboard").style.display="block";
 });
-
-const videoGrid=document.getElementById('videoGrid');
-if(videoGrid && Array.isArray(window.FAR3OON_VIDEOS)){
-  videoGrid.innerHTML=window.FAR3OON_VIDEOS.map(v=>`<article class="video-card"><div class="video-frame"><iframe src="${v.url}" title="${v.title}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-info"><h3>${v.title}</h3><p>${v.description||''}</p></div></article>`).join('');
-}
-
-const aiForm=document.getElementById('aiForm'), question=document.getElementById('question'), chat=document.getElementById('chatMessages'), askBtn=document.getElementById('askBtn');
-function addMessage(text,type){const el=document.createElement('div');el.className='message '+type;el.textContent=text;chat.appendChild(el);chat.scrollTop=chat.scrollHeight;}
-aiForm?.addEventListener('submit',async e=>{
- e.preventDefault(); const q=question.value.trim(); if(!q)return;
- addMessage(q,'user'); question.value=''; askBtn.disabled=true; askBtn.textContent='جاري التفكير...';
- try{
-   const r=await fetch((API_URL||'')+'/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})});
-   const data=await r.json(); if(!r.ok) throw new Error(data.error||'حدث خطأ');
-   addMessage(data.answer,'bot');
- }catch(err){addMessage('حصلت مشكلة في الاتصال بالمساعد. جرّب تاني بعد قليل.','bot');}
- finally{askBtn.disabled=false;askBtn.textContent='اسأل الآن';}
-});
+const saved=localStorage.getItem("theme");if(saved==="dark")document.documentElement.setAttribute("data-theme","dark");
+$("themeBtn").onclick=()=>{const dark=document.documentElement.getAttribute("data-theme")==="dark";if(dark){document.documentElement.removeAttribute("data-theme");localStorage.setItem("theme","light");$("themeBtn").textContent="☾"}else{document.documentElement.setAttribute("data-theme","dark");localStorage.setItem("theme","dark");$("themeBtn").textContent="☀"}};
 </script>
 </body>
 </html>
