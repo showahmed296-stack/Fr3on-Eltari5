@@ -34,6 +34,17 @@ footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text
 .user-message{background:var(--gold);color:#24170f;align-self:flex-start;max-width:92%}
 .ai-form textarea{width:100%;resize:vertical;min-height:85px;padding:13px;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);font:inherit}
 .ai-form button:disabled{opacity:.6;cursor:wait}
+
+/* روابط التواصل الاجتماعي - إضافة بسيطة دون تغيير التصميم */
+.social-links{display:inline-flex;align-items:center;gap:7px;margin-inline-start:4px}
+.social-link{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;color:#fff;transition:transform .18s ease,opacity .18s ease;flex:0 0 auto}
+.social-link:hover{transform:translateY(-2px);opacity:.88}
+.social-link.youtube{background:#ff0033}
+.social-link.facebook{background:#1877f2}
+.social-link svg{width:18px;height:18px;display:block;fill:currentColor}
+.footer-social{margin:0 0 10px}
+@media(max-width:560px){.social-link{width:29px;height:29px}.social-link svg{width:16px;height:16px}.nav{gap:8px}.nav-actions{gap:6px}}
+
 </style>
 </head>
 <body>
@@ -43,7 +54,14 @@ footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text
   <nav class="links">
     <a href="#about">عن المنصة</a><a href="#features">المميزات</a><a href="#content">المحتوى</a><a href="#videos">الفيديوهات</a><a href="#ask">اسأل فرعون</a><a href="#contact">تواصل معنا</a>
   </nav>
-  <div class="nav-actions"><button class="iconbtn" id="themeBtn">☾</button><button class="loginbtn" id="openAuth">دخول الطلاب</button></div>
+  <div class="nav-actions"><div class="social-links" aria-label="تابع الأستاذ محمد عنتر">
+    <a class="social-link youtube" href="https://www.youtube.com/@Mohaameedanter" target="_blank" rel="noopener noreferrer" aria-label="قناة الأستاذ على يوتيوب" title="قناة الأستاذ على يوتيوب">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
+    </a>
+    <a class="social-link facebook" href="https://www.facebook.com/RozyPh.design?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="صفحة الأستاذ على فيسبوك" title="صفحة الأستاذ على فيسبوك">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.18 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.71 4.53-4.71 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.95.93-1.95 1.89v2.28h3.32l-.53 3.49h-2.79V24C19.61 23.18 24 18.1 24 12.07Z"/></svg>
+    </a>
+  </div><button class="iconbtn" id="themeBtn">☾</button><button class="loginbtn" id="openAuth">دخول الطلاب</button></div>
 </div>
 </header>
 
@@ -111,7 +129,14 @@ footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text
 </div>
 </section>
 
-<footer><div class="container">© 2026 فرعون التاريخ — الأستاذ محمد عنتر</div></footer>
+<footer><div class="container"><div class="social-links footer-social" aria-label="روابط التواصل الاجتماعي"><div class="social-links" aria-label="روابط التواصل الاجتماعي">
+    <a class="social-link youtube" href="https://www.youtube.com/@Mohaameedanter" target="_blank" rel="noopener noreferrer" aria-label="قناة الأستاذ على يوتيوب" title="قناة الأستاذ على يوتيوب">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
+    </a>
+    <a class="social-link facebook" href="https://www.facebook.com/RozyPh.design?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="صفحة الأستاذ على فيسبوك" title="صفحة الأستاذ على فيسبوك">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.18 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.71 4.53-4.71 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.95.93-1.95 1.89v2.28h3.32l-.53 3.49h-2.79V24C19.61 23.18 24 18.1 24 12.07Z"/></svg>
+    </a>
+  </div></div>© 2026 فرعون التاريخ — الأستاذ محمد عنتر</div></footer>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
@@ -206,4 +231,4 @@ const saved=localStorage.getItem("theme");if(saved==="dark")document.documentEle
 $("themeBtn").onclick=()=>{const dark=document.documentElement.getAttribute("data-theme")==="dark";if(dark){document.documentElement.removeAttribute("data-theme");localStorage.setItem("theme","light");$("themeBtn").textContent="☾"}else{document.documentElement.setAttribute("data-theme","dark");localStorage.setItem("theme","dark");$("themeBtn").textContent="☀"}};
 </script>
 </body>
-  </html>
+                                                                </html>
