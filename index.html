@@ -23,6 +23,17 @@ section{padding:62px 0}.section-title{text-align:center;margin-bottom:34px}.sect
 footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text-align:center}
 @media(max-width:850px){.links{display:none}.hero-grid,.characters{grid-template-columns:1fr}.cards,.video-preview,.dash-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.cards,.video-preview,.dash-grid{grid-template-columns:1fr}.hero{padding-top:50px}.hero-card{padding:22px}}
+
+/* مساعد اسأل فرعون */
+.ai-panel{max-width:850px;margin:auto;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+.ai-heading{display:flex;align-items:center;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.ai-symbol{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--surface2);color:var(--gold);font-size:28px}
+.ai-messages{display:flex;flex-direction:column;gap:12px;max-height:420px;overflow:auto;padding:18px 0}
+.ai-message{padding:12px 15px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.9}
+.assistant-message{background:var(--surface2);align-self:stretch}
+.user-message{background:var(--gold);color:#24170f;align-self:flex-start;max-width:92%}
+.ai-form textarea{width:100%;resize:vertical;min-height:85px;padding:13px;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);font:inherit}
+.ai-form button:disabled{opacity:.6;cursor:wait}
 </style>
 </head>
 <body>
@@ -65,7 +76,14 @@ footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text
 <div class="video-preview"><article class="vcard"><div class="vthumb">▶</div><h3>شرح الدروس</h3><p>دروس مرتبة حسب الصف الدراسي.</p><button class="loginbtn" onclick="openAuthPanel()">دخول للمشاهدة</button></article><article class="vcard"><div class="vthumb">★</div><h3>المراجعات</h3><p>مراجعات مركزة قبل الاختبارات.</p><button class="loginbtn" onclick="openAuthPanel()">دخول للمشاهدة</button></article><article class="vcard"><div class="vthumb">?</div><h3>الأسئلة والاختبارات</h3><p>تدريب على أهم أسئلة التاريخ.</p><button class="loginbtn" onclick="openAuthPanel()">دخول للمشاهدة</button></article></div>
 </div></section>
 
-<section id="ask"><div class="container"><div class="section-title"><h2>اسأل فرعون</h2><p>قسم الأسئلة الذكي قادم ضمن تطويرات المنصة.</p></div><div class="grade-note"><strong>🤖 المساعد التاريخي</strong><br><span class="hint">سنضيف هنا المساعد الذكي لشرح الأسئلة ومراجعة التاريخ بشكل آمن.</span></div></div></section>
+<section id="ask">
+<div class="container">
+<div class="section-title"><h2>اسأل فرعون</h2><p>اسأل عن حدث تاريخي أو اطلب شرح درس بالعربية.</p></div>
+<div class="ai-panel">
+  <div class="ai-heading"><span class="ai-symbol">𓂀</span><div><strong>المساعد التاريخي</strong><div class="hint">مساعد تعليمي للتاريخ</div></div></div>
+  <div id="aiMessages" class="ai-messages" aria-live="polite"><div class="ai-message assistant-message">أهلًا بك! اسألني عن التاريخ المصري أو أي درس تاريخي، وسأساعدك على فهمه خطوة بخطوة.</div></div>
+  <form id="aiForm" class="ai-form"><label for="aiQuestion">اكتب سؤالك</label><textarea id="aiQuestion" rows="3" maxlength="1500" placeholder="مثال: ما أهم إصلاحات محمد علي باشا؟" required></textarea><button id="aiSend" class="mainbtn" type="submit">اسأل فرعون</button><p class="hint">لا تكتب بيانات شخصية أو كلمات مرور في المحادثة. راجع المعلومات المهمة مع كتابك الدراسي.</p><div id="aiStatus" class="hint" role="status"></div></form>
+</div></div></section>
 
 <section id="contact"><div class="container"><div class="section-title"><h2>تواصل معنا</h2><p>للاستفسارات والتعاون</p></div><div class="card" style="text-align:center"><strong>📧 showahmed296@gmail.com</strong></div></div></section>
 </main>
@@ -99,6 +117,8 @@ footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
+import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
 
 const firebaseConfig={
 apiKey:"AIzaSyCxbrSZFZn0n58VFx2p2q50e_j8FGjYQgU",
@@ -109,7 +129,18 @@ messagingSenderId:"735338799204",
 appId:"1:735338799204:web:e5a8c2c3509cb7091e7f71",
 measurementId:"G-2X9SJ9W5ZJ"
 };
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const app=initializeApp(firebaseConfig);
+// App Check helps protect Firebase AI requests. The site key must match the registered web app.
+initializeAppCheck(app, {
+  provider: new ReCaptchaEnterpriseProvider("6LftHuMtAAAAAAFev05Mtxhhf0v4WCrjMK2r1U0kX"),
+  isTokenAutoRefreshEnabled: true
+});
+const auth=getAuth(app),db=getFirestore(app);
+const ai=getAI(app,{backend:new GoogleAIBackend()});
+const historyModel=getGenerativeModel(ai,{
+  model:"gemini-2.5-flash",
+  systemInstruction:`أنت «اسأل فرعون»، مساعد تعليمي لموقع الأستاذ محمد عنتر. أجب باللغة العربية الواضحة وبأسلوب بسيط. تخصصك التاريخ المصري والعالمي ومناهج الإعدادي والثانوي. اشرح خطوة بخطوة وميّز بين الحقيقة والرأي. إذا لم تكن متأكدًا فقل ذلك ولا تخترع معلومات. لا تدّعِ أنك الأستاذ محمد عنتر نفسه. ساعد الطالب على الفهم، وإذا كان السؤال خارج التاريخ فوضّح أن تخصصك الأساسي هو التاريخ.`
+});
 const domain="@students.fr3on-eltari5.firebaseapp.com";
 const grades=["أولى إعدادي","ثانية إعدادي","ثالثة إعدادي","أولى ثانوي","ثانية ثانوي"];
 const $=id=>document.getElementById(id),form=$("authForm"),msg=$("msg");
@@ -150,8 +181,29 @@ const d=snap.data();$("dashUser").textContent=d.username;$("dashGrade").textCont
 document.getElementById("publicSite").style.display="none";document.getElementById("authArea").style.display="none";document.getElementById("dashboard").style.display="block";window.scrollTo(0,0);
 });
 
+// المساعد الذكي: لا يحتاج الطالب إلى تسجيل الدخول لطرح سؤال عام.
+const aiForm=$("aiForm"), aiQuestion=$("aiQuestion"), aiMessages=$("aiMessages"), aiSend=$("aiSend"), aiStatus=$("aiStatus");
+function addAIMessage(text,kind){const el=document.createElement("div");el.className="ai-message "+(kind==="user"?"user-message":"assistant-message");el.textContent=text;aiMessages.appendChild(el);aiMessages.scrollTop=aiMessages.scrollHeight;return el;}
+aiForm.onsubmit=async e=>{
+  e.preventDefault();
+  const question=aiQuestion.value.trim();
+  if(!question)return;
+  addAIMessage(question,"user"); aiQuestion.value=""; aiSend.disabled=true; aiStatus.textContent="جاري التفكير في الإجابة…";
+  const loading=addAIMessage("لحظة، أجهز لك الإجابة…","assistant");
+  try{
+    const result=await historyModel.generateContent(question);
+    const answer=result.response.text();
+    loading.textContent=answer || "لم أتمكن من تجهيز إجابة. جرّب صياغة السؤال بطريقة أخرى.";
+    aiStatus.textContent="";
+  }catch(err){
+    console.error("AI assistant error:",err);
+    loading.textContent="تعذر الاتصال بالمساعد الآن. تأكد من إعداد Firebase AI Logic وApp Check، ثم جرّب مرة أخرى.";
+    aiStatus.textContent="لو استمرت المشكلة، ابعتلي صورة رسالة الخطأ من Console أو Firebase.";
+  }finally{aiSend.disabled=false;aiQuestion.focus();}
+};
+
 const saved=localStorage.getItem("theme");if(saved==="dark")document.documentElement.setAttribute("data-theme","dark");
 $("themeBtn").onclick=()=>{const dark=document.documentElement.getAttribute("data-theme")==="dark";if(dark){document.documentElement.removeAttribute("data-theme");localStorage.setItem("theme","light");$("themeBtn").textContent="☾"}else{document.documentElement.setAttribute("data-theme","dark");localStorage.setItem("theme","dark");$("themeBtn").textContent="☀"}};
 </script>
 </body>
-</html>
+  </html>
