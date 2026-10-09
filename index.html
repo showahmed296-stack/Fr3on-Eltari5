@@ -138,7 +138,7 @@ initializeAppCheck(app, {
 const auth=getAuth(app),db=getFirestore(app);
 const ai=getAI(app,{backend:new GoogleAIBackend()});
 const historyModel=getGenerativeModel(ai,{
-  model:"gemini-2.5-flash",
+  model:"gemini-3.8-flash",
   systemInstruction:`أنت «اسأل فرعون»، مساعد تعليمي لموقع الأستاذ محمد عنتر. أجب باللغة العربية الواضحة وبأسلوب بسيط. تخصصك التاريخ المصري والعالمي ومناهج الإعدادي والثانوي. اشرح خطوة بخطوة وميّز بين الحقيقة والرأي. إذا لم تكن متأكدًا فقل ذلك ولا تخترع معلومات. لا تدّعِ أنك الأستاذ محمد عنتر نفسه. ساعد الطالب على الفهم، وإذا كان السؤال خارج التاريخ فوضّح أن تخصصك الأساسي هو التاريخ.`
 });
 const domain="@students.fr3on-eltari5.firebaseapp.com";
