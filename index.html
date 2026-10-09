@@ -45,6 +45,32 @@ footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text
 .footer-social{margin:0 0 10px}
 @media(max-width:560px){.social-link{width:29px;height:29px}.social-link svg{width:16px;height:16px}.nav{gap:8px}.nav-actions{gap:6px}}
 
+
+/* محفظة الطالب - بنفس ألوان وتصميم المنصة */
+.wallet-wrap{margin-top:28px}
+.wallet-card{background:linear-gradient(135deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.wallet-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.wallet-title{display:flex;align-items:center;gap:12px}
+.wallet-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--gold);color:#24170f;font-size:25px}
+.wallet-balance{font-size:clamp(27px,4vw,38px);font-weight:800;color:var(--gold);direction:ltr;unicode-bidi:plaintext}
+.wallet-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.wallet-box{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:18px}
+.wallet-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.wallet-method{display:flex;align-items:center;gap:9px;padding:12px;border:1px solid var(--border);border-radius:11px;cursor:pointer;font-weight:700}
+.wallet-method input{width:auto;margin:0;accent-color:var(--gold)}
+.wallet-box input,.wallet-box select{margin-bottom:9px}
+.wallet-note{font-size:12px;color:var(--muted);margin:8px 0}
+.wallet-status{display:none;margin-top:12px;padding:11px;border-radius:10px;font-size:14px}
+.wallet-status.show{display:block}
+.wallet-status.success{background:#245d3c;color:#fff}
+.wallet-status.error{background:#7b2424;color:#fff}
+.wallet-status.pending{background:var(--surface2);border:1px solid var(--border);color:var(--text)}
+.wallet-history{margin-top:18px}
+.wallet-history-list{display:grid;gap:9px;margin-top:10px}
+.wallet-history-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 13px;border:1px solid var(--border);border-radius:10px;font-size:13px}
+.wallet-status-badge{display:inline-block;padding:3px 8px;border-radius:20px;background:var(--surface2);font-size:12px}
+@media(max-width:650px){.wallet-grid{grid-template-columns:1fr}.wallet-methods{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -120,6 +146,67 @@ footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text
 <section class="dashboard" id="dashboard">
 <div class="container">
 <div class="dash-head"><div><h2>أهلاً يا <span id="dashUser"></span> 👋</h2><div class="badge">الصف: <span id="dashGrade"></span></div></div><button class="logout" id="logoutBtn">تسجيل الخروج</button></div>
+
+<div class="wallet-wrap">
+  <div class="wallet-card">
+    <div class="wallet-top">
+      <div class="wallet-title">
+        <span class="wallet-icon" aria-hidden="true">ج.م</span>
+        <div><h2 style="margin:0">محفظتي</h2><div class="hint">رصيدك بالجنيه المصري</div></div>
+      </div>
+      <div style="text-align:left">
+        <div id="walletBalance" class="wallet-balance">0.00 ج.م</div>
+        <div id="walletBalanceHint" class="hint">الرصيد المعتمد في حسابك</div>
+      </div>
+    </div>
+    <div class="wallet-grid">
+      <div class="wallet-box">
+        <h3 style="margin-top:0">➕ إيداع رصيد</h3>
+        <p class="hint">اختار طريقة الإيداع واملأ البيانات لإرسال طلب مراجعة.</p>
+        <form id="depositForm">
+          <label for="depositAmount">المبلغ بالجنيه المصري</label>
+          <input id="depositAmount" type="number" min="10" max="10000" step="1" inputmode="decimal" placeholder="مثال: 100" required>
+          <div class="wallet-methods">
+            <label class="wallet-method"><input type="radio" name="depositMethod" value="code" checked> كود شحن</label>
+            <label class="wallet-method"><input type="radio" name="depositMethod" value="wallet"> محفظة إلكترونية</label>
+          </div>
+          <div id="codeFields">
+            <label for="depositCode">كود الشحن</label>
+            <input id="depositCode" type="text" maxlength="80" autocomplete="off" placeholder="اكتب كود الشحن">
+            <p class="wallet-note">لن يُضاف الرصيد بمجرد إدخال الكود؛ يجب التحقق منه على الخادم والتأكد من أنه لم يُستخدم من قبل.</p>
+          </div>
+          <div id="walletFields" hidden>
+            <label for="walletProvider">اختار المحفظة</label>
+            <select id="walletProvider">
+              <option value="vodafone_cash">فودافون كاش</option>
+              <option value="etisalat_cash">اتصالات كاش</option>
+              <option value="orange_cash">أورنج كاش</option>
+              <option value="we_pay">WE Pay</option>
+              <option value="other">محفظة إلكترونية أخرى</option>
+            </select>
+            <label for="senderPhone">رقم المحفظة المُحوِّلة</label>
+            <input id="senderPhone" type="tel" inputmode="tel" maxlength="20" placeholder="رقم الهاتف المستخدم في التحويل">
+            <label for="transferRef">رقم العملية / مرجع التحويل (إن وجد)</label>
+            <input id="transferRef" type="text" maxlength="100" placeholder="رقم مرجع العملية">
+            <p class="wallet-note">رقم الاستقبال أو رابط الدفع لم يُحدد بعد؛ لا تحوّل أموالًا قبل أن تظهر بيانات دفع رسمية مؤكدة.</p>
+          </div>
+          <button class="mainbtn" id="depositSubmit" type="submit">إرسال طلب الإيداع</button>
+          <div id="depositStatus" class="wallet-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+      <div class="wallet-box">
+        <h3 style="margin-top:0">🔒 حماية رصيدك</h3>
+        <p>طلبات الإيداع تظهر بحالة <strong>قيد المراجعة</strong> إلى أن يتم التحقق من الدفع. الرصيد المعتمد لا يتغير بمجرد إرسال الطلب.</p>
+        <p class="hint">يجب التحقق من أكواد الشحن والتحويلات على خادم موثوق، وليس داخل المتصفح، حتى لا يُستخدم الكود أكثر من مرة أو يتم تزوير الرصيد.</p>
+        <div class="wallet-history">
+          <strong>طلبات الإيداع الأخيرة</strong>
+          <div id="depositHistory" class="wallet-history-list"><div class="hint">سجّل الدخول لعرض طلباتك.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="grade-only"><div class="grade-note"><strong>🎓 لوحة الطالب</strong><br><span class="hint">هذه المساحة مخصصة لمحتوى الصف المختار. عند إضافة الفيديوهات والاختبارات، ستظهر هنا تلقائيًا.</span></div></div>
 <div class="dash-grid">
 <div class="dash-card"><h3>📚 شرح الدروس</h3><p>الدروس الخاصة بصفك الدراسي.</p></div>
@@ -141,7 +228,7 @@ footer{border-top:1px solid var(--border);padding:35px 0;color:var(--muted);text
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, addDoc, collection, query, where, orderBy, limit, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
 
@@ -199,12 +286,104 @@ finally{$("submitBtn").disabled=false}
 $("logoutBtn").onclick=async()=>{await signOut(auth);showPublic();};
 
 onAuthStateChanged(auth,async user=>{
-if(!user){showPublic();return}
+if(!user){activeWalletUser=null;showPublic();return}
 const snap=await getDoc(doc(db,"users",user.uid));
 if(!snap.exists()){await signOut(auth);return}
 const d=snap.data();$("dashUser").textContent=d.username;$("dashGrade").textContent=d.grade;
-document.getElementById("publicSite").style.display="none";document.getElementById("authArea").style.display="none";document.getElementById("dashboard").style.display="block";window.scrollTo(0,0);
+document.getElementById("publicSite").style.display="none";document.getElementById("authArea").style.display="none";document.getElementById("dashboard").style.display="block";window.scrollTo(0,0);await loadWallet(user);
 });
+
+
+// محفظة الطالب: تُرسل طلبات إيداع للمراجعة فقط ولا تضيف الرصيد من المتصفح.
+let activeWalletUser = null;
+const walletMoney = amount => `${Number(amount || 0).toLocaleString("ar-EG",{minimumFractionDigits:2,maximumFractionDigits:2})} ج.م`;
+function setDepositStatus(text,kind="pending"){
+  const el=$("depositStatus"); if(!el)return;
+  el.textContent=text; el.className="wallet-status show "+kind;
+}
+function updateDepositMethod(){
+  const method=document.querySelector('input[name="depositMethod"]:checked')?.value || "code";
+  $("codeFields").hidden=method!=="code";
+  $("walletFields").hidden=method!=="wallet";
+  $("depositCode").required=method==="code";
+  $("senderPhone").required=method==="wallet";
+}
+document.querySelectorAll('input[name="depositMethod"]').forEach(el=>el.addEventListener("change",updateDepositMethod));
+updateDepositMethod();
+
+async function loadWallet(user){
+  activeWalletUser=user;
+  $("walletBalance").textContent="…";
+  $("walletBalanceHint").textContent="جاري تحميل الرصيد المعتمد";
+  $("depositHistory").innerHTML='<div class="hint">جاري تحميل الطلبات…</div>';
+  try{
+    // الرصيد يُقرأ من wallets/{uid} ويجب ألا تسمح قواعد Firestore للطالب بتعديله.
+    const walletSnap=await getDoc(doc(db,"wallets",user.uid));
+    const balance=walletSnap.exists()?Number(walletSnap.data().balance||0):0;
+    $("walletBalance").textContent=walletMoney(balance);
+    $("walletBalanceHint").textContent="الرصيد المعتمد في حسابك";
+  }catch(err){
+    console.error("Wallet balance read error:",err);
+    $("walletBalance").textContent="غير متاح";
+    $("walletBalanceHint").textContent="راجع إعدادات صلاحيات المحفظة في Firebase";
+  }
+  try{
+    const q=query(collection(db,"depositRequests"),where("uid","==",user.uid),limit(20));
+    const rows=await getDocs(q);
+    if(rows.empty){$("depositHistory").innerHTML='<div class="hint">لا توجد طلبات إيداع حتى الآن.</div>';return}
+    $("depositHistory").innerHTML="";
+    const sorted=rows.docs.sort((a,b)=>(b.data().createdAt?.toMillis?.()||0)-(a.data().createdAt?.toMillis?.()||0)).slice(0,5);
+    sorted.forEach(snap=>{
+      const d=snap.data(),row=document.createElement("div");
+      row.className="wallet-history-item";
+      const left=document.createElement("span");
+      left.textContent=walletMoney(d.amount)+" — "+(d.method==="code"?"كود شحن":"محفظة إلكترونية");
+      const status=document.createElement("span");
+      status.className="wallet-status-badge";
+      status.textContent=d.status==="approved"?"تم القبول":d.status==="rejected"?"مرفوض":"قيد المراجعة";
+      row.append(left,status);$("depositHistory").appendChild(row);
+    });
+  }catch(err){
+    console.error("Deposit history read error:",err);
+    $("depositHistory").innerHTML='<div class="hint">تعذّر تحميل الطلبات. قد تحتاج قواعد Firestore إلى إعداد.</div>';
+  }
+}
+$("depositForm").onsubmit=async e=>{
+  e.preventDefault();
+  if(!activeWalletUser){setDepositStatus("سجّل الدخول أولًا لإرسال طلب إيداع.","error");return}
+  const amount=Number($("depositAmount").value);
+  const method=document.querySelector('input[name="depositMethod"]:checked')?.value || "code";
+  if(!Number.isFinite(amount)||amount<10||amount>10000){setDepositStatus("اكتب مبلغًا من 10 إلى 10000 جنيه.","error");return}
+  const payload={uid:activeWalletUser.uid,amount,method,status:"pending",createdAt:serverTimestamp()};
+  if(method==="code"){
+    const code=$("depositCode").value.trim();
+    if(code.length<6){setDepositStatus("اكتب كودًا صحيحًا.","error");return}
+    // لا نخزن الكود نفسه؛ نرسل بصمة SHA-256 ليتم فحصها ومقارنتها بسجل الأكواد من المسؤول.
+    const bytes=new TextEncoder().encode(code);
+    const digest=await crypto.subtle.digest("SHA-256",bytes);
+    payload.codeHash=Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("");
+  }else{
+    const phone=$("senderPhone").value.trim();
+    if(phone.length<8){setDepositStatus("اكتب رقم المحفظة التي تم التحويل منها.","error");return}
+    payload.provider=$("walletProvider").value;
+    payload.senderPhone=phone;
+    payload.transferRef=$("transferRef").value.trim();
+  }
+  const btn=$("depositSubmit");btn.disabled=true;btn.textContent="جاري إرسال الطلب…";
+  try{
+    const profile=await getDoc(doc(db,"users",activeWalletUser.uid));
+    payload.username=profile.exists()?(profile.data().username||""):"";
+    await addDoc(collection(db,"depositRequests"),payload);
+    $("depositForm").reset();updateDepositMethod();
+    setDepositStatus(method==="code"
+      ?"تم إرسال طلب الكود للمراجعة. لن يُضاف الرصيد إلا بعد التأكد من صلاحية الكود وأنه لم يُستخدم من قبل."
+      :"تم إرسال طلب الإيداع للمراجعة. لن يُضاف الرصيد إلا بعد التحقق من التحويل الفعلي.","success");
+    await loadWallet(activeWalletUser);
+  }catch(err){
+    console.error("Deposit request error:",err);
+    setDepositStatus("لم يتم إرسال الطلب. راجع قواعد Firestore الموجودة في ملف firestore.rules.","error");
+  }finally{btn.disabled=false;btn.textContent="إرسال طلب الإيداع"}
+}
 
 // المساعد الذكي: لا يحتاج الطالب إلى تسجيل الدخول لطرح سؤال عام.
 const aiForm=$("aiForm"), aiQuestion=$("aiQuestion"), aiMessages=$("aiMessages"), aiSend=$("aiSend"), aiStatus=$("aiStatus");
@@ -231,4 +410,4 @@ const saved=localStorage.getItem("theme");if(saved==="dark")document.documentEle
 $("themeBtn").onclick=()=>{const dark=document.documentElement.getAttribute("data-theme")==="dark";if(dark){document.documentElement.removeAttribute("data-theme");localStorage.setItem("theme","light");$("themeBtn").textContent="☾"}else{document.documentElement.setAttribute("data-theme","dark");localStorage.setItem("theme","dark");$("themeBtn").textContent="☀"}};
 </script>
 </body>
-                                                                </html>
+                                                              </html>
